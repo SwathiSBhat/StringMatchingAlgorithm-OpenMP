@@ -19,10 +19,6 @@ for(i=0;i<len-1;i++)
 a=str[i];
 occ[a]=i;
 }
-//printf("end  of lstocc func\n");
-/*printf("occurence of str chars:\n");
-for(i=0;str[i]!='\0';i++)
-printf("%c----%d\n",str[i],occ[(int)str[i]]);*/
 return occ;
 }
 
@@ -32,24 +28,18 @@ int *locc;
 int i0,j,m,n;
 n=end-start+1;
 m=strlen(p);
-//printf("length of text sent:  %d  len of pattern %d\n",n,m);
 locc=lastocc(p);
 i0=start;
-//printf("locc[t[i0]] :  %d\n",locc[t[i0]]);
 while(i0<=end-m+1)
 {
-  //printf("entered first while\n");
+ 
   j=m-1;
-  //printf("p[%d]=%c \t t[%d]=%c\n",j,p[j],i0+j,t[i0+j]);
   while(j>=0 && p[j]==t[i0+j])
     j--;
   if(j<0)
   printf("Pattern found at %d\n",i0);
   i0+=m-1;
-  //printf("i0  :  %d\n",i0);
-  //printf("locc[t[i0]] :  %d\n",locc[t[i0]]);
   i0-=locc[t[i0]];
-  //printf("i0  :  %d\n",i0);
 }
 }
 
@@ -57,7 +47,6 @@ int main()
 {
   char pat[10];
   char *text;
-  //char *text="abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr",*pat="def";
   int n,m,i=0;
   size_t size = 0;
 
@@ -80,42 +69,8 @@ fread(text, size, 1, fp); /* Read 1 chunk of size bytes from fp into buffer */
 /* NULL-terminate the buffer */
 text[size] = '\0';
 
-/* Print it ! */
-//printf("text:  %s\n", text);
-/*
-//WORKS!!
-
-FILE *fp;
-fp=fopen("gene.txt","r");
-fscanf(fp,"%s",text);
-
-printf("text :  %s\n",text);
-*/
-
-/*  char ch;
-          FILE *file;
-          file = fopen("gene.txt","r");
-          while ((ch=fgetc(file)) != EOF)
-          {
-            printf("ch: %c\n",ch);
-            //text[i]=ch;
-            //i+=1;
-          }
-          text[i]='\0';
-          fclose(file);
-
-*/
-/*
-  FILE *fp=fopen("gene.txt", "r");
-  int i=0;
-  while(feof(fp))
-       text[i++] = fgetc(fp);
-  text[i]='\0';
-*/
-
-  //scanf("%s",text);
   scanf("%s",pat);
-  //printf("text : %s pattern : %s\n",text,pat);
+  
   int lenp=strlen(pat);
   printf("Length of pattern: %d\n",lenp);
   printf("Length of pattern: %d\n",strlen(text));
