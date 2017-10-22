@@ -43,30 +43,21 @@ text[size] = '\0';
 
 scanf("%s",pat);
 int lenp=strlen(pat);
-//printf("Length of pattern: %d\n",lenp);
-//printf("Length of pattern: %lu\n",strlen(text));
-
-//char text[] = "AABAACAADAABAAABAA";
-//char pat[] = "AABA";
 
 int bs=strlen(text)/NUM_THREADS;
 int rem=strlen(text)%NUM_THREADS;
-//printf("bs: %d rem: %d\n",bs,rem);
-//printf("num of threads %d\n",NUM_THREADS);
 int tid,start,end;
 
 #pragma omp parallel num_threads(NUM_THREADS) private(tid,start,end) shared(text,pat,rem,bs,m)
 {
   tid=omp_get_thread_num();
-  //printf("tid  %d\n",tid);
+  
   if(tid==0)
   {
     #pragma omp critical (part1)
     {
       start=tid;
       end=bs-1;
-      //printf("start: %d end: %d\n",start,end);
-      //printf("tid= %d  text block : %d ... %d\n",tid,start,end);
       search(text,start,end,pat);
     }
   }
@@ -76,17 +67,12 @@ int tid,start,end;
     {
       start=(tid*bs)-lenp;
       end=(tid*bs)+bs-1;
-      //printf("start: %d end: %d\n",start,end);
-      //printf("tid= %d  text block : %d ... %d\n",tid,start,end);
       search(text,start,end,pat);
     }
   }
 }
 if(rem!=0)
 search(text,(NUM_THREADS+1)*bs,strlen(text),pat);
-
-//search(text,pat);
-
 
 printf("Total number of matches = %d\n",count );
 return 0;
