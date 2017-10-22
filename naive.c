@@ -39,8 +39,6 @@ int lenp=strlen(pat);
 printf("Length of pattern: %d\n",lenp);
 printf("Length of pattern: %lu\n",strlen(text));
 
-//char text[] = "AABAACAADAABAAABAA";
-//char pat[] = "AABA";
 search(text,pat);
 
 return 0;
